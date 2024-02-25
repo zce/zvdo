@@ -123,7 +123,7 @@ for (const file of files) {
   const description = title
   const duration = ~~execSync(`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${file}"`, { cwd }).toString().trim()
   const source = `${baseUrl}${id}.m3u8`
-  const watermarkArgs = watermark ? `-i "${watermark}" -filter_complex "overlay=${overlay}" -c:v h264_nvenc -c:a aac` : '-c copy'
+  const watermarkArgs = watermark ? `-i "${watermark}" -filter_complex "overlay=${overlay}" -c:v h264_nvenc -c:a aac -b:v 800k -b:a 128k -r 30 -crf 20` : '-c copy'
   const m3u8Args = `-map 0 -f segment -segment_time ${segment} -segment_list "${output}/${id}.m3u8" -segment_format mpegts "${output}/${id}-%03d.ts"`
   execSync(`ffmpeg -i "${file}" ${watermarkArgs} ${m3u8Args}`, { cwd })
   sections.push(`
