@@ -28,7 +28,7 @@ const argv = () => {
     options: {
       base: { type: 'string', short: 'b' },
       output: { type: 'string', short: 'o', default: 'output' },
-      segment: { type: 'string', short: 's', default: '60' },
+      segment: { type: 'string', short: 's', default: '30' },
       watermark: { type: 'string', short: 'w' },
       overlay: { type: 'string', default: '1780:940' },
       help: { type: 'boolean', short: 'h', default: false },
@@ -54,7 +54,7 @@ Arguments:
 Options:
   -b, --base           Base URL for m3u8 files
   -o, --output         Output directory for m3u8 files
-  -s, --segment        Segment time for m3u8 files, default is 60
+  -s, --segment        Segment time for m3u8 files, default is 30
   -w, --watermark      Watermark image path
   --overlay            Overlay position for watermark, default is 1780:940
   -h, --help           Display this message
