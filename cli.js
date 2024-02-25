@@ -6,7 +6,14 @@ import { mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs
 import pkg from './package.json' assert { type: 'json' }
 import { resolve } from 'node:path'
 
-const nanoid = () => Math.random().toString(36).slice(2)
+const ids = new Set()
+
+const nanoid = () => {
+  const id = Math.random().toString(36).slice(2, 8)
+  if (ids.has(id)) return nanoid()
+  ids.add(id)
+  return id
+}
 
 const cleanDir = dir => {
   rmSync(dir, { recursive: true, force: true })
@@ -28,7 +35,7 @@ const argv = () => {
     options: {
       base: { type: 'string', short: 'b' },
       output: { type: 'string', short: 'o', default: 'output' },
-      segment: { type: 'string', short: 's', default: '30' },
+      segment: { type: 'string', short: 's', default: '10' },
       watermark: { type: 'string', short: 'w' },
       overlay: { type: 'string', default: '1780:940' },
       help: { type: 'boolean', short: 'h', default: false },
@@ -54,7 +61,7 @@ Arguments:
 Options:
   -b, --base           Base URL for m3u8 files
   -o, --output         Output directory for m3u8 files
-  -s, --segment        Segment time for m3u8 files, default is 30
+  -s, --segment        Segment time for m3u8 files, default is 10
   -w, --watermark      Watermark image path
   --overlay            Overlay position for watermark, default is 1780:940
   -h, --help           Display this message
