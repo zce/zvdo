@@ -3,7 +3,10 @@
   "version": "0.0.3",
   "description": "split video into m3u8 and ts files",
   "type": "module",
-  "bin": "build.js",
+  "bin": "cli.js",
   "author": "zce <w@zce.me> (https://zce.me)",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "echo 1"
+  }
 }
